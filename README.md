@@ -16,14 +16,43 @@ Real-world recommendation systems, like Spotify's or Youtube's, analyze vast amo
 
 ## How The System Works
 
-- features each `Song` use in the system
-  - genre, mood, energy, tempo, energy, valence. and danceability
-- `UserProfile` store:
-  - favorite genre, favorite mood, target_energy, acousticness preference
-- How does your `Recommender` compute a score for each song, - How do you choose which songs to recommend
-  -The recommender computes a score for each song by comparing its features (e.g., genre, mood, energy, acousticness) to the user's preferences. Songs are scored based on how closely they match the user's favorite genre and mood, how similar their energy is to the target, and whether they align with acoustic preferences. top-scoring songs are recommended, ensuring they align with the user's taste profile.
+Each `Song` has these attributes: `genre`, `mood`, `energy`, `tempo_bpm`, `valence`, `danceability`, and `acousticness`.
 
-You can include a simple diagram or bullet list if helpful.
+Each `UserProfile` stores: `favorite_genre`, `favorite_mood`, `target_energy`, `target_valence`, `target_tempo_bpm`, and `likes_acoustic`.
+
+The `Recommender` scores every song against the user profile using the following point system, then returns the top-k songs by score:
+
+**Exact / categorical matches (binary)**
+
+| Feature | Points | Notes |
+|---|---|---|
+| Genre match | 3.0 | Strongest taste signal |
+| Mood match | 2.0 | Situational and highly intentional |
+| Acoustic preference | 1.0 | Awarded when `likes_acoustic` is true and `acousticness > 0.6` |
+
+**Continuous similarity (0 to max points)**
+
+Closeness is rewarded gradually — a near miss still earns partial credit.
+
+| Feature | Max Points | How it's calculated |
+|---|---|---|
+| Energy | 2.0 | `2.0 × (1 - │target_energy - song.energy│)` |
+| Valence | 1.5 | `1.5 × (1 - │target_valence - song.valence│)` |
+| Tempo | 1.0 | `1.0 × (1 - │target_tempo - song.tempo│ / 100)` |
+| Danceability | 0.5 | Tiebreaker bonus signal |
+
+**Potential Biases**
+
+The system might over prioritize genre song may exactly match user's other preferences such as mood and danceability
+
+
+**Maximum possible score: 11.0 points**
+
+The final score can also be expressed as a match percentage (score ÷ 11.0) and is used in `explain_recommendation` to describe why a song was chosen.
+
+**Data flow diagram**
+[View Data Flow Diagram](flowchart.md)
+
 
 ---
 
