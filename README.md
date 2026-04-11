@@ -11,21 +11,17 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-Replace this paragraph with your own summary of what your version does.
-
+Real-world recommendation systems, like Spotify's or Youtube's, analyze vast amounts of user interaction data to predict preferences. They often combine collaborative filtering (using users' patterns) and content-based filtering (using song's attributes). This simulation will prioritize a content-based approach, focusing on features like genre, mood, energy, and valence to recommend songs that align closely with a user's profile
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
-
-Some prompts to answer:
-
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+- features each `Song` use in the system
+  - genre, mood, energy, tempo, energy, valence. and danceability
+- `UserProfile` store:
+  - favorite genre, favorite mood, target_energy, acousticness preference
+- How does your `Recommender` compute a score for each song, - How do you choose which songs to recommend
+  -The recommender computes a score for each song by comparing its features (e.g., genre, mood, energy, acousticness) to the user's preferences. Songs are scored based on how closely they match the user's favorite genre and mood, how similar their energy is to the target, and whether they align with acoustic preferences. top-scoring songs are recommended, ensuring they align with the user's taste profile.
 
 You can include a simple diagram or bullet list if helpful.
 
