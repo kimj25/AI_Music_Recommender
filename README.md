@@ -79,6 +79,12 @@ pip install -r requirements.txt
 python -m src.main
 ```
 
+## Demo
+
+![Music Recommender output](Screenshot%202026-04-11%20at%201.31.46%20PM.png)
+
+---
+
 ### Running Tests
 
 Run the starter tests with:
