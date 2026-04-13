@@ -86,6 +86,9 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     if user_prefs.get("likes_acoustic") and song["acousticness"] > 0.6:
         score += 1.0
         reasons.append(f"acoustic preference (+1.0)")
+    elif user_prefs.get("likes_acoustic") == False and song["acousticness"] > 0.6:
+        score -= 1.0
+        reasons.append(f"acoustic mismatch (-1.0)")
 
     # Continuous similarity
     energy_pts = 2.0 * (1 - abs(user_prefs.get("energy", 0) - song["energy"]))
@@ -96,7 +99,7 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     score += valence_pts
     reasons.append(f"valence similarity (+{valence_pts:.2f})")
 
-    tempo_pts = 1.0 * (1 - abs(user_prefs.get("tempo_bpm", 0) - song["tempo_bpm"]) / 100)
+    tempo_pts = max(0.0, 1.0 * (1 - abs(user_prefs.get("tempo_bpm", 0) - song["tempo_bpm"]) / 100))
     score += tempo_pts
     reasons.append(f"tempo similarity (+{tempo_pts:.2f})")
 
