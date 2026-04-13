@@ -124,6 +124,7 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Reflection
 
+Click bottom link for the model_card!
 [**Model Card**](model_card.md)
 
 Building this system made it clear how much a recommender's behavior is shaped by its scoring weights — a small change like raising the genre weight from 2.0 to 3.0 significantly narrows what gets recommended. It also showed how bias can be structural rather than intentional: the danceability bonus favors certain genres by default, not because of any deliberate choice but simply because the feature was added without tying it to user preference.
