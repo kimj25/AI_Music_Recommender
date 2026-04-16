@@ -14,3 +14,7 @@ venv/
 # Pytest cache
 .pytest_cache/
 env
+
+# Environment variables (never commit secrets)
+.env
+.env.*
