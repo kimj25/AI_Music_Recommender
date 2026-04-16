@@ -16,3 +16,26 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 15,Crown & Concrete,Rashid Flows,hip hop,confident,0.80,96,0.69,0.85,0.08
 16,Wildflower Road,June Sparrow,folk,peaceful,0.30,74,0.83,0.42,0.93
 17,Fractal Dreams,Psy Nomad,psytrance,psychedelic,0.88,148,0.44,0.76,0.06
+18,Dusty Highway,Wren & the Drifters,country,peaceful,0.45,94,0.74,0.52,0.80
+19,Velvet Frequency,Jade Monroe,r&b,moody,0.62,92,0.58,0.78,0.15
+20,Fuego en la Pista,Trio Caliente,latin,energetic,0.88,128,0.86,0.92,0.10
+21,Neon Seoul,PRISM,k-pop,happy,0.85,130,0.88,0.87,0.05
+22,Island Drift,Coral Sound,reggae,relaxed,0.38,76,0.72,0.60,0.68
+23,Iron Cathedral,Void Engine,metal,intense,0.97,160,0.30,0.55,0.04
+24,Groove Protocol,The Brass Collective,funk,confident,0.78,108,0.76,0.90,0.12
+25,Sunday Sorrow,Elara James,soul,melancholic,0.44,70,0.38,0.48,0.82
+26,Café Ipanema,Rio Duo,bossa nova,peaceful,0.32,84,0.77,0.50,0.88
+27,Lagos Sunrise,Sunwave Collective,afrobeats,energetic,0.82,112,0.85,0.89,0.08
+28,Neural Rave,Rektor,drum and bass,intense,0.96,174,0.55,0.80,0.02
+29,Birch & Bone,Hollow Pine,indie folk,calm,0.28,68,0.64,0.38,0.91
+30,Midnight Velvet,Sable & Co.,neo soul,moody,0.55,86,0.45,0.72,0.20
+31,Porch Light,Mae Calloway,country,calm,0.30,72,0.76,0.40,0.88
+32,Rodeo Dust,Buck & the Sundowners,country,happy,0.72,112,0.80,0.65,0.55
+33,Heartland Sky,Wren & the Drifters,country,adventurous,0.62,100,0.78,0.58,0.62
+34,Late Night Sugar,Jade Monroe,r&b,chill,0.48,84,0.62,0.70,0.22
+35,Neon Rain,Sable & Co.,r&b,melancholic,0.52,78,0.32,0.65,0.18
+36,Fire & Gold,Rashida Vox,r&b,confident,0.78,98,0.72,0.82,0.10
+37,Slow Burn Sunday,Elara James,r&b,relaxed,0.40,72,0.58,0.55,0.35
+38,Cherry Blossom Rush,PRISM,k-pop,happy,0.82,122,0.90,0.85,0.08
+39,Starfall,Luna Hex,k-pop,moody,0.60,96,0.42,0.74,0.12
+40,Hyper Pink,G-Wave,k-pop,energetic,0.92,140,0.82,0.91,0.03

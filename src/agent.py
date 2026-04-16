@@ -107,8 +107,9 @@ TOOLS = [
 ]
 
 SYSTEM_PROMPT = """You are a friendly and knowledgeable music recommendation assistant. \
-Your catalog has 17 songs spanning lofi, pop, rock, ambient, jazz, synthwave, indie pop, \
-world, edm, classical, blues, hip hop, folk, and psytrance.
+Your catalog has 40 songs spanning lofi, pop, rock, ambient, jazz, synthwave, indie pop, \
+world, edm, classical, blues, hip hop, folk, psytrance, country, r&b, latin, k-pop, \
+reggae, metal, funk, soul, bossa nova, afrobeats, drum and bass, indie folk, and neo soul.
 
 When a user tells you what they want:
 1. Call extract_music_preferences to understand their structured preferences

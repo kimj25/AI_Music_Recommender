@@ -18,7 +18,9 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 GENRES = [
     "lofi", "pop", "rock", "ambient", "jazz", "synthwave",
     "indie pop", "world", "edm", "classical", "blues",
-    "hip hop", "folk", "psytrance",
+    "hip hop", "folk", "psytrance", "country", "r&b", "latin",
+    "k-pop", "reggae", "metal", "funk", "soul", "bossa nova",
+    "afrobeats", "drum and bass", "indie folk", "neo soul",
 ]
 
 MOODS = [
