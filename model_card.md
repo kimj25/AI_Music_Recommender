@@ -51,7 +51,9 @@ The catalog contains **40 songs across 27 genres** — including pop, lofi, rock
 
 The scoring algorithm was tested against three user profiles — a calm lofi listener, a high-energy dance listener, and a deep rock listener. Top-ranked songs were checked for genre/mood alignment and score explanations were verified to correctly reflect what drove each result.
 
-The AI layers were evaluated with unit tests (`tests/test_preference_model.py`, `tests/test_rag.py`, `tests/test_agent.py`). The most notable finding was that the specialized model occasionally over-weighted genre when input was ambiguous, and that RAG results improved significantly with longer, more descriptive song descriptions in the corpus.
+The AI layers were evaluated with unit tests (`tests/test_preference_model.py`, `tests/test_rag.py`, `tests/test_agent.py`). Tests check structure and value ranges rather than exact outputs, since Claude's responses are non-deterministic.
+
+The preference model was also evaluated using confidence scoring. Clear inputs like "something upbeat and happy for a road trip" scored 0.9, while vague inputs like "music" dropped to 0.45. That finding was surprising — without the confidence score, the low-context output would have looked like a valid result.
 
 ---
 
@@ -67,6 +69,8 @@ The AI layers were evaluated with unit tests (`tests/test_preference_model.py`, 
 
 ## 9. Personal Reflection  
 
-Extending MusicMate Finder into a full AI system made it clear how each layer solves a different problem: the specialized model handles the gap between natural language and structured data, RAG handles semantic intent that exact matching misses, and the agent ties everything together into a coherent conversation. The original scoring logic stayed completely unchanged — the new layers wrap around it rather than replace it, which showed how modular design makes a system easier to extend.
+Building this showed me that each AI layer is solving a different problem. The scoring algorithm is good at ranking but can't understand "something for a rainy afternoon." RAG handles that kind of vague input but just returns candidates. The preference model turns natural language into something structured. None of them work well alone.
 
-Working with AI tools throughout reinforced that human review remains essential. Test cases and careful inspection catch things that look correct but quietly test the wrong thing. The biggest takeaway is that building with AI accelerates development, but the judgment about what to build, how to test it, and what counts as correct still has to come from the developer.
+Working with AI sped things up but I still had to review everything carefully. It suggested using ChromaDB's in-memory mode which saved a lot of setup — that was genuinely helpful. But it also generated test cases that all passed while checking the wrong things. They verified the output existed, not that it was correct. I had to rewrite those manually to check actual value ranges.
+
+The biggest takeaway is that you can't just trust output that looks right. The confidence scoring work made that concrete — "music" with no context returned a full valid-looking profile, and the only way to catch it was measuring how sure the model actually was.

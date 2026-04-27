@@ -69,7 +69,7 @@ Every song is scored against the user profile and top results are returned with 
 
 **Maximum possible score: 11.0 points**
 
-**Data flow diagram:** [flowchart.md](flowchart.md)
+**Data flow diagram:** [flowchart.md](assets/flowchart.md)
 
 ---
 
@@ -126,12 +126,12 @@ venv/bin/python -m pytest tests/
 ## Demo
 
 **AI Music Recommender Demo**
-![AI Music Recommender Part 1](demo1.png)
-![AI Music Recommender Part 2](demo2.png)
-![AI Music Recommender Part 3](demo3.png)
+![AI Music Recommender Part 1](assets/demo1.png)
+![AI Music Recommender Part 2](assets/demo2.png)
+![AI Music Recommender Part 3](assets/demo3.png)
 
 **TOP 5 Recommendation Scoring Demo**
-![Top 5 Recommendation Demo](scoring_system.png)
+![Top 5 Recommendation Demo](assets/scoring_system.png)
 
 
 ---
@@ -144,9 +144,13 @@ All 22 automated tests pass across all four layers. The preference model also ou
 
 ## Limitations and Risks
 
-- Catalog only has 40 songs
-- Genre and mood are exact string matches — similar but differently labeled songs score as misses
-- Danceability is always rewarded regardless of user preference, creating an unintentional bias toward EDM and hip hop
+The catalog only has 40 songs so recommendations get repetitive. Genre and mood use exact string matching, so similar-sounding songs with different labels score as misses. Danceability is always rewarded regardless of preference, which unintentionally favors EDM and hip hop. The preference model also struggles with mixed moods — if you say "upbeat but kind of sad," it picks one and ignores the other.
+
+Misuse risk is low since this doesn't handle sensitive data. The main risk is API key exposure, which is why it's stored in `.env` and excluded from version control.
+
+The most surprising thing during testing was that typing just "music" with no context still returned a full confident-looking profile — the confidence score (0.45) was the only thing that revealed it was basically a guess.
+
+AI was helpful when it suggested using ChromaDB's in-memory mode, which saved a lot of setup complexity. But it also generated test cases that all passed while missing the point — they checked that fields existed, not that the values were reasonable. For example, a test for a high-energy query would pass even if the model returned energy: 0.0. I rewrote those to check actual value ranges instead.
 
 ---
 
@@ -174,7 +178,7 @@ The biggest thing I learned is that passing tests doesn't mean the system actual
 
 ## Reflection
 
-[**Model Card**](model_card.md)
+[**Model Card**](assets/model_card.md)
 
 Building this showed me that each AI layer is solving a different problem. The scoring algorithm is good at ranking but can't understand "something for a rainy afternoon." RAG can handle that kind of vague input but just returns a list of candidates. The preference model turns natural language into something structured. None of them work well alone — they need each other.
 
