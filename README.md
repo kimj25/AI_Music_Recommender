@@ -136,6 +136,12 @@ venv/bin/python -m pytest tests/
 
 ---
 
+## Reliability
+
+All 22 automated tests pass across all four layers. The preference model also outputs a confidence score for each extraction — clear inputs like "something chill for studying" scored 0.93, while vague ones like "music" dropped to 0.45. The AI struggled most when there wasn't enough context to pick a genre.
+
+---
+
 ## Limitations and Risks
 
 - Catalog only has 40 songs

@@ -42,11 +42,13 @@ Always return valid JSON with exactly these fields:
   "energy": <float 0.0-1.0>,
   "likes_acoustic": <true or false>,
   "valence": <float 0.0-1.0>,
-  "tempo_bpm": <float, typical range 60-180>
+  "tempo_bpm": <float, typical range 60-180>,
+  "confidence": <float 0.0-1.0>
 }}
 
 Energy guide: 0.0-0.3 very calm, 0.3-0.5 relaxed, 0.5-0.7 moderate, 0.7-0.85 energetic, 0.85-1.0 intense
 Valence guide: 0.0-0.3 dark/sad, 0.3-0.5 bittersweet, 0.5-0.7 positive, 0.7-1.0 uplifting/happy
+Confidence guide: 0.9-1.0 input clearly maps to a genre/mood, 0.7-0.9 reasonable match with some ambiguity, below 0.7 vague or conflicting input
 Return only the JSON object. No explanation, no markdown."""
 
 # Few-shot examples covering low / high / sad energy profiles
@@ -57,7 +59,7 @@ FEW_SHOT: list[dict] = [
     },
     {
         "role": "assistant",
-        "content": '{"genre": "lofi", "mood": "focused", "energy": 0.35, "likes_acoustic": true, "valence": 0.55, "tempo_bpm": 78}',
+        "content": '{"genre": "lofi", "mood": "focused", "energy": 0.35, "likes_acoustic": true, "valence": 0.55, "tempo_bpm": 78, "confidence": 0.92}',
     },
     {
         "role": "user",
@@ -65,7 +67,7 @@ FEW_SHOT: list[dict] = [
     },
     {
         "role": "assistant",
-        "content": '{"genre": "edm", "mood": "energetic", "energy": 0.90, "likes_acoustic": false, "valence": 0.78, "tempo_bpm": 138}',
+        "content": '{"genre": "edm", "mood": "energetic", "energy": 0.90, "likes_acoustic": false, "valence": 0.78, "tempo_bpm": 138, "confidence": 0.95}',
     },
     {
         "role": "user",
@@ -73,7 +75,7 @@ FEW_SHOT: list[dict] = [
     },
     {
         "role": "assistant",
-        "content": '{"genre": "blues", "mood": "melancholic", "energy": 0.40, "likes_acoustic": true, "valence": 0.28, "tempo_bpm": 82}',
+        "content": '{"genre": "blues", "mood": "melancholic", "energy": 0.40, "likes_acoustic": true, "valence": 0.28, "tempo_bpm": 82, "confidence": 0.88}',
     },
     {
         "role": "user",
@@ -81,7 +83,7 @@ FEW_SHOT: list[dict] = [
     },
     {
         "role": "assistant",
-        "content": '{"genre": "jazz", "mood": "relaxed", "energy": 0.35, "likes_acoustic": true, "valence": 0.70, "tempo_bpm": 88}',
+        "content": '{"genre": "jazz", "mood": "relaxed", "energy": 0.35, "likes_acoustic": true, "valence": 0.70, "tempo_bpm": 88, "confidence": 0.85}',
     },
 ]
 
