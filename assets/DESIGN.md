@@ -31,7 +31,7 @@ results conversationally.
 ┌──────────────────────────────────────────────────┐
 │           Agentic Orchestrator                   │  ← AI Feature 1
 │              (src/agent.py)                      │
-│  - Claude claude-sonnet-4-6 with tool use              │
+│  - Claude claude-haiku-4-5-20251001 with tool use       │
 │  - Multi-turn conversation loop                  │
 │  - Routes to tools based on user intent          │
 │  - Synthesizes results into natural language     │
@@ -163,7 +163,7 @@ tools to answer any music request.
 3. If `stop_reason == "tool_use"`: execute tools, append results, loop
 4. If `stop_reason == "end_turn"`: return final text response
 
-**Model:** `claude-sonnet-4-6` (strong reasoning for multi-step orchestration)
+**Model:** `claude-haiku-4-5-20251001` (switched from Sonnet to stay under $5 API budget)
 
 ---
 
@@ -184,7 +184,7 @@ tools to answer any music request.
 ```
 music_recommender_simulation/
 ├── data/
-│   ├── songs.csv                    # 17-song catalog (existing)
+│   ├── songs.csv                    # 40-song catalog (existing)
 │   └── song_descriptions.json       # NEW: rich text per song for RAG
 ├── src/
 │   ├── recommender.py               # UNCHANGED: scoring algorithm
@@ -210,7 +210,7 @@ music_recommender_simulation/
 
 | Component | Technology |
 |-----------|-----------|
-| LLM (agent + specialized model) | Anthropic Claude (claude-sonnet-4-6 / claude-haiku-4-5) |
+| LLM (agent + specialized model) | Anthropic Claude (claude-haiku-4-5-20251001) |
 | Vector store | ChromaDB (in-memory) |
 | Embeddings | sentence-transformers/all-MiniLM-L6-v2 (via ChromaDB default) |
 | UI | Streamlit |
@@ -245,9 +245,9 @@ pytest tests/
 
 | Decision | Rationale |
 |----------|-----------|
-| Haiku for preference extraction | Fast + cheap for classification; Sonnet reserved for reasoning |
-| ChromaDB in-memory | No infrastructure setup; fine for 17-song catalog |
+| Haiku for all Claude calls | Fast + cheap for both classification and orchestration; keeps total spend under $5 |
+| ChromaDB in-memory | No infrastructure setup; fine for 40-song catalog |
 | RAG + scoring hybrid | RAG has high recall, scoring has precision — combination is better than either alone |
 | Tool use over direct calls | Agent decides when/what to call based on context, handles follow-ups naturally |
-| Few-shot over fine-tuning | Catalog is too small (17 songs) to justify fine-tuning; few-shot with fixed vocabulary is sufficient |
+| Few-shot over fine-tuning | Catalog is too small (40 songs) to justify fine-tuning; few-shot with fixed vocabulary is sufficient |
 | Existing scoring untouched | Rule-based scoring is interpretable and correct — no need to replace it |
