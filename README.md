@@ -143,7 +143,7 @@ venv/bin/python -m pytest tests/
 
 ## Demo
 
-![Demo Video](<div style="position: relative; padding-bottom: 64.93975903614458%; height: 0;"><iframe src="https://www.loom.com/embed/716e5d080d844b62a072c09648cca338" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>)
+[![Demo Video](https://cdn.loom.com/sessions/thumbnails/716e5d080d844b62a072c09648cca338-with-play.gif)](https://www.loom.com/share/716e5d080d844b62a072c09648cca338)
 
 **AI Music Recommender Demo**
 ![AI Music Recommender Part 1](assets/demo1.png)
