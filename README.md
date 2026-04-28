@@ -143,6 +143,8 @@ venv/bin/python -m pytest tests/
 
 ## Demo
 
+[![Demo Video](https://cdn.loom.com/sessions/thumbnails/716e5d080d844b62a072c09648cca338-with-play.gif)](https://www.loom.com/share/716e5d080d844b62a072c09648cca338)
+
 **AI Music Recommender Demo**
 ![AI Music Recommender Part 1](assets/demo1.png)
 ![AI Music Recommender Part 2](assets/demo2.png)
