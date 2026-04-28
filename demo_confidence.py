@@ -3,7 +3,7 @@ from src.preference_model import PreferenceModel
 model = PreferenceModel()
 
 inputs = [
-    "I want something upbeat and happy for a road trip",
+    "I want something upbeat and happy for a birthday party",
     "music for a late night drive through the city",
     "music",
 ]

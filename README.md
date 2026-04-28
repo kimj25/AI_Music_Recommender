@@ -27,16 +27,34 @@ The system is built in four layers. User input enters through a **Streamlit chat
 ┌──────────────────────────────────────────────────┐
 │           Agentic Orchestrator                   │
 │              (src/agent.py)                      │
-│         Claude Haiku + tool use                  │
-└────────┬──────────────┬──────────────┬───────────┘
-         │              │              │
-┌────────▼────┐  ┌───────▼───────┐  ┌──▼─────────────┐
-│ Specialized │  │  RAG Engine   │  │    Scoring     │
-│   Model     │  │  (src/rag.py) │  │  Algorithm     │
-│(src/prefer- │  │  ChromaDB +   │  │(src/recommender│
-│ence_model   │  │  embeddings   │  │    .py)        │
-│   .py)      │  │               │  │                │
-└─────────────┘  └───────────────┘  └────────────────┘
+│  - claude-haiku-4-5-20251001 with tool use       │
+│  - Calls tools, loops until response is ready    │
+│  - Synthesizes final results into natural lang   │
+└────────┬──────────────┬───────────────────────────┘
+         │              │
+         ▼              ▼
+┌────────────┐  ┌───────────────┐
+│Specialized │  │  RAG Engine   │
+│  Model     │  │  (src/rag.py) │
+│(src/prefer-│  │               │
+│ence_model  │  │  - ChromaDB   │
+│   .py)     │  │  - Sentence   │
+│            │  │  Transformers │
+│- claude-   │  │  - semantic   │
+│  haiku     │  │    search     │
+│- few-shot  │  │    over song  │
+│  examples  │  │    descriptions│
+└─────┬──────┘  └──────┬────────┘
+      │  structured     │  candidate
+      │  profile        │  songs
+      └────────┬────────┘
+               ▼
+┌──────────────────────────────┐
+│      Scoring Algorithm       │
+│    (src/recommender.py)      │
+│  - Ranks all songs by score  │
+│  - Returns top-k with reasons│
+└──────────────────────────────┘
 ```
 
 For full design details see [DESIGN.md](assets/DESIGN.md).

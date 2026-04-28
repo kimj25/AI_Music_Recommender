@@ -23,37 +23,42 @@ results conversationally.
 │               Streamlit Chat UI                  │
 │                   (src/app.py)                   │
 │  - Multi-turn chat interface                     │
-│  - Session state for conversation history       │
-│  - @st.cache_resource for agent singleton       │
+│  - Session state for conversation history        │
+│  - @st.cache_resource for agent singleton        │
 └─────────────────────┬────────────────────────────┘
                       │ natural language
                       ▼
 ┌──────────────────────────────────────────────────┐
 │           Agentic Orchestrator                   │  ← AI Feature 1
 │              (src/agent.py)                      │
-│  - Claude claude-haiku-4-5-20251001 with tool use       │
-│  - Multi-turn conversation loop                  │
-│  - Routes to tools based on user intent          │
-│  - Synthesizes results into natural language     │
-└────────┬──────────────┬──────────────┬───────────┘
-         │              │              │
-         ▼              ▼              ▼
-┌────────────┐  ┌───────────────┐  ┌────────────────┐
-│Specialized │  │  RAG Engine   │  │    Scoring     │
-│  Model     │  │  (src/rag.py) │  │  Algorithm     │
-│(src/prefer-│  │               │  │(src/recommender│
-│ence_model  │  │  - ChromaDB   │  │    .py)        │
-│   .py)     │  │  - Sentence   │  │                │
-│            │  │  Transformers │  │  - score_song()│
-│- claude-   │  │  embeddings   │  │  - recommend_  │
-│  haiku for │  │  - semantic   │  │    songs()     │
-│  fast      │  │    search     │  │  (existing,    │
-│  classifi- │  │  over song    │  │   unchanged)   │
-│  cation    │  │  descriptions │  │                │
-│- few-shot  │  │               │  │                │
-│  examples  │  │               │  │                │
-└────────────┘  └───────────────┘  └────────────────┘
-  AI Feature 3     AI Feature 2       Existing logic
+│  - claude-haiku-4-5-20251001 with tool use       │
+│  - Calls tools, loops until response is ready    │
+│  - Synthesizes final results into natural lang   │
+└────────┬──────────────┬───────────────────────────┘
+         │              │
+         ▼              ▼
+┌────────────┐  ┌───────────────┐
+│Specialized │  │  RAG Engine   │
+│  Model     │  │  (src/rag.py) │  ← AI Feature 2
+│(src/prefer-│  │               │
+│ence_model  │  │  - ChromaDB   │
+│   .py)     │  │  - Sentence   │
+│            │  │  Transformers │
+│- claude-   │  │  - semantic   │
+│  haiku     │  │    search     │
+│- few-shot  │  │    over song  │
+│  examples  │  │    descriptions│
+└─────┬──────┘  └──────┬────────┘
+      │  structured     │  candidate
+      │  profile        │  songs
+      └────────┬────────┘
+               ▼
+┌──────────────────────────────┐
+│      Scoring Algorithm       │  ← Existing logic (unchanged)
+│    (src/recommender.py)      │
+│  - Ranks all songs by score  │
+│  - Returns top-k with reasons│
+└──────────────────────────────┘
 ```
 
 ---
